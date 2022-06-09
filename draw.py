@@ -38,7 +38,7 @@ def findbox(fulltext,ts):
             pass
 if __name__ == '__main__':
     ocr = PaddleOCR(use_angle_cls=False, lang="ch")
-    img_path = '0880c08b0110b1f4a11c.png'
+    img_path = 'input.png'
     result = ocr.ocr(img_path, cls=False)
     img = cv2.imread(img_path)
     for fulltext in result:
