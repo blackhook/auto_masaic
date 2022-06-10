@@ -10,9 +10,16 @@ boxs = []
 lst = []
 re_list = []
 ip_re = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
-domain_re = r"(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z]"
 re_list.append(ip_re)
+
+domain_re = r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z]'
 re_list.append(domain_re)
+
+email_re = r'\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*'
+re_list.append(email_re)
+
+idnum_re = r'(\d{15}$)|(\d{18}$)|(\d{17}(\d|X|x)$)'
+re_list.append(idnum_re)
 
 def mosaci(box,img):
     point_start['x'] = int(box[0][0])
@@ -37,10 +44,11 @@ def findbox(fulltext,ts):
         else:
             pass
 if __name__ == '__main__':
-    ocr = PaddleOCR(use_angle_cls=False, lang="ch")
+    ocr = PaddleOCR(use_angle_cls=False, lang="en")
     img_path = 'input.png'
     result = ocr.ocr(img_path, cls=False)
     img = cv2.imread(img_path)
+    img_out = img.copy()
     for fulltext in result:
         for i in re_list:
             match = re.compile(i).search(fulltext[1][0])
