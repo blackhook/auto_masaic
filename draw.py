@@ -67,6 +67,6 @@ if __name__ == '__main__':
         for box in boxs:
             img_out = mosaci(box,img)
     cv2.imshow("img", img_out)
-    cv2.imwrite('result.jpg',img_out)
+    cv2.imwrite('result.png',img_out)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
